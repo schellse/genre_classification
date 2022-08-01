@@ -4,8 +4,8 @@ import pandas as pd
 import wandb
 
 # for run in an Telekom environment
-os.environ["HTTPS_PROXY"] = "http://sia-lb.telekom.de:8080"
-os.environ["HTTP_PROXY"] = "http://sia-lb.telekom.de:8080"
+#os.environ["HTTPS_PROXY"] = "http://sia-lb.telekom.de:8080"
+#os.environ["HTTP_PROXY"] = "http://sia-lb.telekom.de:8080"
 
 run = wandb.init(job_type="data_tests")
 

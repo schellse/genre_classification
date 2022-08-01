@@ -3,8 +3,8 @@ import scipy.stats
 import pandas as pd
 
 # for run in an Telekom environment
-os.environ["HTTPS_PROXY"] = "http://sia-lb.telekom.de:8080"
-os.environ["HTTP_PROXY"] = "http://sia-lb.telekom.de:8080"
+#os.environ["HTTPS_PROXY"] = "http://sia-lb.telekom.de:8080"
+#os.environ["HTTP_PROXY"] = "http://sia-lb.telekom.de:8080"
 
 def test_column_presence_and_type(data):
 

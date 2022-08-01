@@ -4,8 +4,8 @@ import hydra
 from omegaconf import DictConfig, OmegaConf
 
 # for run in an Telekom environment
-os.environ["HTTPS_PROXY"] = "http://sia-lb.telekom.de:8080"
-os.environ["HTTP_PROXY"] = "http://sia-lb.telekom.de:8080"
+#os.environ["HTTPS_PROXY"] = "http://sia-lb.telekom.de:8080"
+#os.environ["HTTP_PROXY"] = "http://sia-lb.telekom.de:8080"
 
 # This automatically reads in the configuration
 @hydra.main(config_name='config')

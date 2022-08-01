@@ -7,6 +7,11 @@ import wandb
 import mlflow.sklearn
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_auc_score, plot_confusion_matrix
+import os
+
+# for run in an Telekom environment
+#os.environ["HTTPS_PROXY"] = "http://sia-lb.telekom.de:8080"
+#os.environ["HTTP_PROXY"] = "http://sia-lb.telekom.de:8080"
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
 logger = logging.getLogger()

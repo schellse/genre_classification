@@ -21,6 +21,10 @@ import wandb
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.impute import SimpleImputer
 
+# for run in an Telekom environment
+#os.environ["HTTPS_PROXY"] = "http://sia-lb.telekom.de:8080"
+#os.environ["HTTP_PROXY"] = "http://sia-lb.telekom.de:8080"
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
 logger = logging.getLogger()
 
