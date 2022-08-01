@@ -3,6 +3,9 @@ import os
 import hydra
 from omegaconf import DictConfig, OmegaConf
 
+# for run in an Telekom environment
+os.environ["HTTPS_PROXY"] = "http://sia-lb.telekom.de:8080"
+os.environ["HTTP_PROXY"] = "http://sia-lb.telekom.de:8080"
 
 # This automatically reads in the configuration
 @hydra.main(config_name='config')
@@ -40,17 +43,44 @@ def go(config: DictConfig):
     if "preprocess" in steps_to_execute:
 
         ## YOUR CODE HERE: call the preprocess step
-        pass
+        _ = mlflow.run(
+            os.path.join(root_path, "preprocess"),
+            "main",
+            parameters={
+                "input_artifact": "raw_data.parquet:latest",
+                "artifact_name": "processed_data.csv",
+                "artifact_type": "processed_data",
+                "artifact_description": "Cleaned data"
+            },
+        )
 
     if "check_data" in steps_to_execute:
 
         ## YOUR CODE HERE: call the check_data step
-        pass
+        _ = mlflow.run(
+            os.path.join(root_path, "check_data"),
+            "main",
+            parameters={
+                "input_artifact": "processed_data.csv:latest",
+                "artifact_name": "raw_data.parquet",
+                "artifact_type": "raw_data",
+                "artifact_description": "Data as downloaded"
+            },
+        )
 
     if "segregate" in steps_to_execute:
 
         ## YOUR CODE HERE: call the segregate step
-        pass
+        _ = mlflow.run(
+            os.path.join(root_path, "segregate"),
+            "main",
+            parameters={
+                "file_url": config["data"]["file_url"],
+                "artifact_name": "raw_data.parquet",
+                "artifact_type": "raw_data",
+                "artifact_description": "Data as downloaded"
+            },
+        )
 
     if "random_forest" in steps_to_execute:
 
@@ -60,13 +90,31 @@ def go(config: DictConfig):
         with open(model_config, "w+") as fp:
             fp.write(OmegaConf.to_yaml(config["random_forest_pipeline"]))
 
-        ## YOUR CODE HERE: call the random_forest step
-        pass
+            ## YOUR CODE HERE: call the random_forest step
+            _ = mlflow.run(
+                os.path.join(root_path, "segregate"),
+                "main",
+                parameters={
+                    "file_url": config["data"]["file_url"],
+                    "artifact_name": "raw_data.parquet",
+                    "artifact_type": "raw_data",
+                    "artifact_description": "Data as downloaded"
+                },
+            )
 
     if "evaluate" in steps_to_execute:
 
         ## YOUR CODE HERE: call the evaluate step
-        pass
+        _ = mlflow.run(
+            os.path.join(root_path, "evaluate"),
+            "main",
+            parameters={
+                "file_url": config["data"]["file_url"],
+                "artifact_name": "raw_data.parquet",
+                "artifact_type": "raw_data",
+                "artifact_description": "Data as downloaded"
+            },
+        )
 
 
 if __name__ == "__main__":
