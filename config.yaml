@@ -1,7 +1,7 @@
 main:
-  project_name: exercise_14
+  project_name: genre_classification_prod #exercise_14
   experiment_name: dev
-  execute_steps:
+  execute_steps: #['download', 'preprocess', 'check_data', 'segregate', 'random_forest', 'evaluate']
     - download
     - preprocess
     - check_data
