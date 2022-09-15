@@ -1,5 +1,5 @@
 pandas
-wandb
+wandb==0.12.21
 numpy
 mlflow
 pip
