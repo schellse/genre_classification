@@ -1,0 +1,8 @@
+pandas
+wandb
+numpy
+mlflow
+pip
+matplotlib
+seaborn
+plotly
